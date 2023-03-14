@@ -3,7 +3,7 @@ import { Header } from "../components/header"
 import { AboutMe } from "./AboutMe"
 export const Homepage = () => {
     return <div>
-        <Header />
+        {/* <Header /> */}
         <AboutMe />
     </div>
 }
