@@ -65,8 +65,7 @@ export const AboutMe = () => {
       </PhotoFrame>
       <TextDiv>
         <h4>Hi There! 👋</h4>
-        <h1>I'm</h1>
-        <h2>Aryan Yadav</h2>
+        <h1>I'm <br/> Aryan Yadav</h1>
         <TypeWriterEffect
             textStyle={{
               fontFamily: 'Red Hat Display',
