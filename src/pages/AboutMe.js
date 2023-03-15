@@ -24,7 +24,7 @@ const PhotoFrame = styled.div`
   width: 15vw;
   margin-right: 40px;
   `;
-  
+
 const Image = styled.img`
   max-width: 100%;
   border-radius: 16px;
@@ -33,7 +33,15 @@ const Image = styled.img`
 
 const TextDiv = styled.div`
   flex-direction: column;
-  max-width: 50%;
+  max-width: 100%;
+`;
+const IamDiv = styled.div`
+  display: flex;
+  /* text-align: center; */
+  align-items: baseline;
+  flex-direction: row;
+  /* max-width: 50%; */
+  width: 100%;
 `;
 
 export const AboutMe = () => {
@@ -56,30 +64,57 @@ export const AboutMe = () => {
         <Image src={myPhoto} alt="My photo" />
       </PhotoFrame>
       <TextDiv>
-        <h1>Hi There!</h1>
-        <h1>I am Aryan Yadav</h1>
+        <h4>Hi There! 👋</h4>
+        <h1>I'm</h1>
+        <h2>Aryan Yadav</h2>
         <TypeWriterEffect
-          textStyle={{
-            fontFamily: 'Red Hat Display',
-            color: '#3F3D56',
-            fontWeight: 500,
-            fontSize: '1.5em',
-          }}
-          startDelay={2000}
-          cursorColor="#3F3D56"
-          multiText={[
-            'Software Developer',
-            'Flutter Developer',
-            'Front-End Developer',
-            'Hybrid App Developer',
-            'Full Stack Developer',
-            'Back-End Developer',
-            'Software Engineer',
-          ]}
-          loop={false}
-          nextTextDelay={1000}
-          typeSpeed={30}
-        />
+            textStyle={{
+              fontFamily: 'Red Hat Display',
+              color: '#3F3D56',
+              fontWeight: 500,
+              fontSize: '1.5em',
+            }}
+            startDelay={2000}
+            cursorColor="#3F3D56"
+            multiText={[
+              'Software Developer',
+              'Flutter Developer',
+              'Front-End Developer',
+              'Hybrid App Developer',
+              'Full Stack Developer',
+              'Back-End Developer',
+              'Software Engineer',
+            ]}
+            loop={false}
+            nextTextDelay={1000}
+            typeSpeed={30}
+          />
+        {/* <IamDiv>
+          <b>{"I'm"}&nbsp;</b> 
+          <TypeWriterEffect
+            textStyle={{
+              fontFamily: 'Red Hat Display',
+              color: '#3F3D56',
+              fontWeight: 500,
+              fontSize: '1.5em',
+            }}
+            startDelay={2000}
+            cursorColor="#3F3D56"
+            multiText={[
+              'Software Developer',
+              'Flutter Developer',
+              'Front-End Developer',
+              'Hybrid App Developer',
+              'Full Stack Developer',
+              'Back-End Developer',
+              'Software Engineer',
+            ]}
+            loop={false}
+            nextTextDelay={1000}
+            typeSpeed={30}
+          />
+        </IamDiv> */}
+
       </TextDiv>
     </AboutMeDiv>
   );
