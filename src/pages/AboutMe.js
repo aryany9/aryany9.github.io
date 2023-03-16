@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import myPhoto from "../assets/images/my-photo.png";
 import TypeWriterEffect from 'react-typewriter-effect';
+// import { LinkedIn, GitHub } from '@mui/icons-material';
+import GithubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import {blue} from '@mui/material/colors';
+import MailIcon from '@mui/icons-material/MailRounded';
 
 const AboutMeDiv = styled.div`
     display: flex;
@@ -40,6 +45,20 @@ const IamDiv = styled.div`
   /* text-align: center; */
   align-items: baseline;
   flex-direction: row;
+  /* max-width: 50%; */
+  width: 100%;
+`;
+const SocialMedias = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* padding-left: 5px; */
+  /* padding-right: 5px; */
+  align-items: stretch;
+  justify-items: stretch;
+  /* text-align: center; */
   /* max-width: 50%; */
   width: 100%;
 `;
@@ -88,6 +107,11 @@ export const AboutMe = () => {
             nextTextDelay={1000}
             typeSpeed={30}
           />
+          <SocialMedias>
+            <LinkedInIcon onClick={event => window.open('https://linkedin.com/in/aryany9')} cursor='pointer' fontSize='large' sx={{color: blue[800]}}/>
+            <GithubIcon onClick={event => window.open('https://github.com/aryany9')} cursor='pointer' fontSize='large'/>
+            <MailIcon onClick={event => window.open('mailto://aryan9.00y@gmail.com')} cursor='pointer' fontSize='large'/>
+          </SocialMedias>
         {/* <IamDiv>
           <b>{"I'm"}&nbsp;</b> 
           <TypeWriterEffect
