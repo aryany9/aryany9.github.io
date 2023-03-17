@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import myPhoto from "../assets/images/my-photo.png";
-import TypeWriterEffect from 'react-typewriter-effect';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 import StarIcon from '@mui/icons-material/Star';
+import ScrollDownWidget from '../components/ScrollDownWidget';
 
 const ExperienceDiv = styled.div`
     display: flex;
@@ -22,30 +21,37 @@ const ExperienceDiv = styled.div`
 
     // background-color: black;
 `
-const PhotoFrame = styled.div`
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 10px;
+const ScrollDownDiv = styled.div`
+  /* position: fixed; */
+  /* top: 100%; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* align-content: center; */
+  /* align-self: center; */
+  /* background-color: aqua; */
+  /* height: 20%; */
   display: inline-block;
-  height: ${props => props.screenHeight}px/2;
-  width: 15vw;
-  margin-right: 40px;
-  `;
-
-const Image = styled.img`
-  max-width: 100%;
-  border-radius: 16px;
-  height: auto;
+  /* Adjust this value as needed to position the widget above the AboutMeDiv */
+  /* left: 50%;  */
+  /* Position the widget at the center of the screen horizontally */
+  transform: translateX(0%) translateY(100%); /* Center the widget by moving it back 50% of its own width */
+  cursor: pointer;
 `;
 
-const TextDiv = styled.div`
-  flex-direction: column;
-  max-width: 50%;
-`;
+// const ScrollDownDiv = styled.div`
+//   position: fixed;
+//   bottom: 20px; 
+//   /* Adjust this value as needed to position the widget above the AboutMeDiv */
+//   left: 50%; 
+//   /* Position the widget at the center of the screen horizontally */
+//   transform: translateX(-50%); /* Center the widget by moving it back 50% of its own width */
+//   cursor: pointer;
+// `;
 
-export const Experience = () => {
+export const Experience = React.forwardRef((props, ref) => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
   useEffect(() => {
     const handleResize = () => {
       setScreenHeight(window.innerHeight);
@@ -58,7 +64,7 @@ export const Experience = () => {
   }, []);
 
   return (
-    <ExperienceDiv screenHeight={screenHeight}>
+    <ExperienceDiv screenHeight={screenHeight} ref={props.reference}>
       <VerticalTimeline>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
@@ -133,10 +139,16 @@ export const Experience = () => {
           </p>
         </VerticalTimelineElement>
         <VerticalTimelineElement
-          iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff' }}
-          icon={<StarIcon />}
+          iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff', alignItems: 'center', alignContent: 'center', textAlign: 'center' }}
+          icon={
+            <ScrollDownDiv>
+
+              <ScrollDownWidget />
+            </ScrollDownDiv>
+          }
+
         />
       </VerticalTimeline>
     </ExperienceDiv>
   );
-};
+});
