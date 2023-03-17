@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 const SkillsDiv = styled.div`
@@ -28,6 +28,12 @@ export default function Skills() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
     return (
-        <SkillsDiv screenHeight={screenHeight}>Skills</SkillsDiv>
+        <SkillsDiv screenHeight={screenHeight}>
+            <b>
+                Skills
+                <br />
+                To Be Added..
+            </b>
+        </SkillsDiv>
     )
 }

@@ -16,6 +16,11 @@ const ArrowDiv = styled.div`
     height: 10px;
     margin: 0 5px; */
     /* Animation */
+    height: 100%;
+    /* align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center; */
     animation: ${BounceAnimation} 1s linear infinite;
     animation-delay: ${props => props.delay};
 `

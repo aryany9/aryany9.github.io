@@ -5,6 +5,7 @@ import 'react-vertical-timeline-component/style.min.css';
 import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 import StarIcon from '@mui/icons-material/Star';
+import ScrollDownWidget from '../components/ScrollDownWidget';
 
 const ExperienceDiv = styled.div`
     display: flex;
@@ -20,9 +21,34 @@ const ExperienceDiv = styled.div`
 
     // background-color: black;
 `
+const ScrollDownDiv = styled.div`
+  /* position: fixed; */
+  /* top: 100%; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* align-content: center; */
+  /* align-self: center; */
+  /* background-color: aqua; */
+  /* height: 20%; */
+  display: inline-block;
+  /* Adjust this value as needed to position the widget above the AboutMeDiv */
+  /* left: 50%;  */
+  /* Position the widget at the center of the screen horizontally */
+  transform: translateX(0%) translateY(100%); /* Center the widget by moving it back 50% of its own width */
+  cursor: pointer;
+`;
 
+// const ScrollDownDiv = styled.div`
+//   position: fixed;
+//   bottom: 20px; 
+//   /* Adjust this value as needed to position the widget above the AboutMeDiv */
+//   left: 50%; 
+//   /* Position the widget at the center of the screen horizontally */
+//   transform: translateX(-50%); /* Center the widget by moving it back 50% of its own width */
+//   cursor: pointer;
+// `;
 
-export const Experience =  React.forwardRef((props, ref) => {
+export const Experience = React.forwardRef((props, ref) => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -113,8 +139,14 @@ export const Experience =  React.forwardRef((props, ref) => {
           </p>
         </VerticalTimelineElement>
         <VerticalTimelineElement
-          iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff' }}
-          icon={<StarIcon />}
+          iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff', alignItems: 'center', alignContent: 'center', textAlign: 'center' }}
+          icon={
+            <ScrollDownDiv>
+
+              <ScrollDownWidget />
+            </ScrollDownDiv>
+          }
+
         />
       </VerticalTimeline>
     </ExperienceDiv>
