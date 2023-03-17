@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import myPhoto from "../assets/images/my-photo.png";
-import TypeWriterEffect from 'react-typewriter-effect';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import WorkIcon from '@mui/icons-material/Work';
@@ -22,30 +20,12 @@ const ExperienceDiv = styled.div`
 
     // background-color: black;
 `
-const PhotoFrame = styled.div`
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 10px;
-  display: inline-block;
-  height: ${props => props.screenHeight}px/2;
-  width: 15vw;
-  margin-right: 40px;
-  `;
 
-const Image = styled.img`
-  max-width: 100%;
-  border-radius: 16px;
-  height: auto;
-`;
 
-const TextDiv = styled.div`
-  flex-direction: column;
-  max-width: 50%;
-`;
-
-export const Experience = () => {
+export const Experience =  React.forwardRef((props, ref) => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
   useEffect(() => {
     const handleResize = () => {
       setScreenHeight(window.innerHeight);
@@ -58,7 +38,7 @@ export const Experience = () => {
   }, []);
 
   return (
-    <ExperienceDiv screenHeight={screenHeight}>
+    <ExperienceDiv screenHeight={screenHeight} ref={props.reference}>
       <VerticalTimeline>
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
@@ -139,4 +119,4 @@ export const Experience = () => {
       </VerticalTimeline>
     </ExperienceDiv>
   );
-};
+});
