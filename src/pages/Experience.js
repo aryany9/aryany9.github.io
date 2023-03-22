@@ -6,6 +6,10 @@ import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 import StarIcon from '@mui/icons-material/Star';
 import ScrollDownWidget from '../components/ScrollDownWidget';
+import { app } from '../Firebase';
+import { firestore } from '../Firebase';
+import { collection, query, where, getDocs } from "firebase/firestore";
+
 
 const ExperienceDiv = styled.div`
     display: flex;
@@ -51,6 +55,9 @@ const ScrollDownDiv = styled.div`
 export const Experience = React.forwardRef((props, ref) => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [experienceArray, setExperienceArray] = useState([]);
+  const [educationArray, setEducationArray] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,10 +70,127 @@ export const Experience = React.forwardRef((props, ref) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      const q = query(collection(firestore, "Experience"));
+      const querySnapshot = await getDocs(q);
+      setExperienceArray(querySnapshot.docs);
+
+    }
+    const fetchEducations = async () => {
+      const q = query(collection(firestore, "Education"));
+      const querySnapshot = await getDocs(q);
+      setEducationArray(querySnapshot.docs);
+
+    }
+    fetchExperiences();
+    fetchEducations();
+  }, []);
+  // experienceArray.forEach((item, index) => {
+
+  //   console.log(item.data().jobTitle);
+  // });
+
   return (
     <ExperienceDiv screenHeight={screenHeight} ref={props.reference}>
+
       <VerticalTimeline>
+
+        {
+          [...experienceArray].reverse().map((item, index) => (
+            // console.log(item.data().jobTitle);
+            <VerticalTimelineElement
+              key={index}
+              className="vertical-timeline-element--work"
+              contentStyle={{ background: `${item.data().EndDate ? 'white' : 'rgb(33, 150, 243)'}`, color: `${item.data().EndDate ? 'black' : 'white'}` }}
+              contentArrowStyle={{ borderRight: `7px solid ${item.data().EndDate ? 'black' : 'rgb(33, 150, 243)'}` }}
+              date={`${item.data().StartDate.toDate().getFullYear()} - ${item.data().EndDate?.toDate().getFullYear() ?? "Present"}`}
+              iconStyle={{ background: `${item.data().EndDate ? 'white' : 'rgb(33, 150, 243)'}`, color: `${item.data().EndDate ? 'black' : 'white'}` }}
+              icon={item.data().Category == 'Work' ? <WorkIcon /> : <SchoolIcon />}
+            >
+              <h3 className="vertical-timeline-element-title">{item.data().jobTitle}</h3>
+              <h4 className="vertical-timeline-element-subtitle">{item.data().companyName}</h4>
+              <h5 className="vertical-timeline-element-subtitle">{item.data().Location}</h5>
+
+              {/* <br />➢ Developed an Account Aggregator mobile application from
+                scratch with data consent approval process.
+                <br />➢ Managed AWS services, including ECS, Task-Definition,
+                Autoscaling, and CI/CD for deployment optimization.
+                <br />➢ Utilized CloudWatch for debugging and timely issue
+                identification and resolution.
+                <br />➢ Handled YES Bank Backend for AFV CERSAI Portal to ensure
+                regulatory compliance.
+                <br />➢ Worked with IBM Developer Portal and API Connect for
+                IndusInd Bank for secure data exchange.
+                <br />➢ Collaborated with cross-functional teams to meet user
+                needs and expectations */}
+              <ul style={{ listStyleType: "disc" }}>
+                {item.data().bulletPoints.map((jData, ind) => (
+                  <li key={ind}>{jData}</li>
+                ))}
+              </ul>
+
+            </VerticalTimelineElement>
+          ))
+        }
+        {
+          [...educationArray].reverse().map((item, index) => (
+            // console.log(item.data().jobTitle);
+            <VerticalTimelineElement
+              key={index}
+              className="vertical-timeline-element--work"
+              contentStyle={{ background: `${item.data().EndDate ? 'white' : 'rgb(33, 150, 243)'}`, color: `${item.data().EndDate ? 'black' : 'white'}` }}
+              contentArrowStyle={{ borderRight: `7px solid ${item.data().EndDate ? 'black' : 'rgb(33, 150, 243)'}` }}
+              date={`${item.data().StartDate.toDate().getFullYear()} - ${item.data().EndDate?.toDate().getFullYear() ?? "Present"}`}
+              iconStyle={{ background: `${item.data().EndDate ? 'white' : 'rgb(33, 150, 243)'}`, color: `${item.data().EndDate ? 'black' : 'white'}` }}
+              icon={item.data().Category == 'Work' ? <WorkIcon /> : <SchoolIcon />}
+            >
+              <h3 className="vertical-timeline-element-title">{item.data().Course}</h3>
+              <h4 className="vertical-timeline-element-subtitle">{item.data().Degree}</h4>
+              <h5 className="vertical-timeline-element-subtitle">{item.data().Location}</h5>
+              <p>
+                {/* <br />➢ Developed an Account Aggregator mobile application from
+                scratch with data consent approval process.
+                <br />➢ Managed AWS services, including ECS, Task-Definition,
+                Autoscaling, and CI/CD for deployment optimization.
+                <br />➢ Utilized CloudWatch for debugging and timely issue
+                identification and resolution.
+                <br />➢ Handled YES Bank Backend for AFV CERSAI Portal to ensure
+                regulatory compliance.
+                <br />➢ Worked with IBM Developer Portal and API Connect for
+                IndusInd Bank for secure data exchange.
+                <br />➢ Collaborated with cross-functional teams to meet user
+                needs and expectations */}
+                {/* <ul style={{ listStyleType: "disc" }}>
+                  {item.data().bulletPoints.map((jData, ind) => (
+                    <li key={ind}>{jData}</li>
+                  ))}
+                </ul> */}
+                <br />University: <b>{item.data().University}</b>
+                <br />College: <b>{item.data().College}</b>
+              </p>
+            </VerticalTimelineElement>
+          ))
+        }
         <VerticalTimelineElement
+          iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff', alignItems: 'center', alignContent: 'center', textAlign: 'center' }}
+          icon={
+            <ScrollDownDiv>
+
+              <ScrollDownWidget />
+            </ScrollDownDiv>
+          }
+        />
+      </VerticalTimeline>
+    </ExperienceDiv>
+  );
+});
+
+
+
+
+
+{/* <VerticalTimelineElement
           className="vertical-timeline-element--work"
           contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
           contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
@@ -137,18 +261,4 @@ export const Experience = React.forwardRef((props, ref) => {
             <br />
             University: <b>University of Mumbai</b>
           </p>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff', alignItems: 'center', alignContent: 'center', textAlign: 'center' }}
-          icon={
-            <ScrollDownDiv>
-
-              <ScrollDownWidget />
-            </ScrollDownDiv>
-          }
-
-        />
-      </VerticalTimeline>
-    </ExperienceDiv>
-  );
-});
+        </VerticalTimelineElement> */}

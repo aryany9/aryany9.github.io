@@ -9,6 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 console.log(analytics.app.name)
 root.render(
   <React.StrictMode>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet" />
     <App />
   </React.StrictMode>
 );
