@@ -31,6 +31,14 @@ jobs:
       run: CI=false npm run build
 
     - name: Deploy
+      env:
+        FIREBASE_APIKEY: ${{ secrets.FIREBASE_APIKEY }}
+        FIREBASE_AUTHDOMAIN: ${{ secrets.FIREBASE_AUTHDOMAIN }}
+        FIREBASE_PROJECTID: ${{ secrets.FIREBASE_PROJECTID }}
+        FIREBASE_STORAGEBUCKET: ${{ secrets.FIREBASE_STORAGEBUCKET }}
+        FIREBASE_MESSAGINGSENDERID: ${{ secrets.FIREBASE_MESSAGINGSENDERID }}
+        FIREBASE_APPID: ${{ secrets.FIREBASE_APPID }}
+        FIREBASE_MEASUREMENTID: ${{ secrets.FIREBASE_MEASUREMENTID }}
       run: |
         git config --global user.name $user_name
         git config --global user.email $user_email
