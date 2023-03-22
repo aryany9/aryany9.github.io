@@ -14,8 +14,8 @@ export const Homepage = () => {
         experienceRef.current.scrollIntoView({ behavior: 'smooth' });
     };
     return <div>
-        <AboutMe reference={aboutMeRef} click={() => scrollToDiv(experienceRef)}/>
-        <Experience reference={experienceRef} />
+        <AboutMe reference={aboutMeRef} click={() => scrollToDiv(experienceRef)} />
+        <Experience reference={experienceRef} click={() => scrollToDiv(skillsRef)} />
         <Skills reference={skillsRef} />
     </div>
 }
