@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { analytics } from './Firebase';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+console.log(analytics.app.name)
 root.render(
   <React.StrictMode>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet" />
     <App />
   </React.StrictMode>
 );
