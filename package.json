@@ -1,60 +1,20 @@
 {
-  "name": "portfolio",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://{username}.github.io",
-  "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@mui/icons-material": "^5.11.11",
-    "@mui/material": "^5.11.13",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "firebase": "^9.18.0",
-    "fs": "^0.0.1-security",
-    "install": "^0.13.0",
-    "npm": "^9.6.2",
-    "os": "^0.1.2",
-    "path": "^0.12.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "react-typewriter-effect": "^1.1.0",
-    "react-vertical-timeline-component": "^3.6.0",
-    "styled-components": "^5.3.8",
-    "web-vitals": "^2.1.4"
-  },
+  "name": "dopefolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "compile:scss": "node-sass sass/main.scss css/style.css -w",
+    "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' css/style.css -o css/style.css",
+    "compress:css": "node-sass css/style.css css/style.css --output-style compressed",
+    "build": "npm-run-all prefix:css compress:css"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "browser": {
-    "fs": false
-  },
+  "author": "",
+  "license": "GPL-3.0",
   "devDependencies": {
-    "gh-pages": "^5.0.0"
+    "autoprefixer": "^10.3.1",
+    "node-sass": "^6.0.1",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^8.3.1"
   }
 }
