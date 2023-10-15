@@ -2,6 +2,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import { device } from './styles/BreakPoints'
 import { lightTheme } from './styles/Theme'
 import { Homepage } from './pages/homepage'
+import "./App.css";
 
 const Title = styled.h1`
   color: ${(props) => props.theme.colors.primaryTextColor};

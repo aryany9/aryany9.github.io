@@ -11,20 +11,20 @@ import { firestore } from '../Firebase';
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 
-const ExperienceDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    // text-align: center;
-    padding: 20px;
-    /* height: ${props => props.screenHeight}px; use state value here */
-    height: 100%; /* use state value here */
-    background-color: #F8F8F8;
+// const div = styled.div`
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-items: center;
+//     flex-wrap: wrap;
+//     // text-align: center;
+//     padding: 20px;
+//     /* height: ${props => props.screenHeight}px; use state value here */
+//     height: 100%; /* use state value here */
+//     background-color: #F8F8F8;
 
-    // background-color: black;
-`
+//     // background-color: black;
+// `
 const ScrollDownDiv = styled.div`
   /* position: fixed; */
   /* top: 100%; */
@@ -41,6 +41,64 @@ const ScrollDownDiv = styled.div`
   transform: translateX(0%) translateY(100%); /* Center the widget by moving it back 50% of its own width */
   cursor: pointer;
 `;
+
+const Heading = styled.h1`
+    font-size: 24px !important;
+    font-weight: bolder;
+    font-family: sans-serif;
+    border-bottom: 5px solid orange;
+    padding-bottom: 10px;
+`
+
+
+
+const CustomVerticalTimeline = styled(VerticalTimeline)`
+  &::before {
+    background:  orange;
+  }
+`;
+
+
+const ExperienceDiv = styled.div`
+     flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+
+    @media (min-width: 960px) {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+   
+  /* h1 { */
+    /* font-weight: bold; */
+    /* padding: 0; */
+    /* font-size: 18px; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* font-family: 'Ubuntu', sans-serif; */
+    /* white-space: nowrap; */
+    /* margin-bottom: 4px; */
+  /* } */
+  
+  /* p { */
+    /* font-weight: normal; */
+    /* padding-left: 10px; */
+  /* } */
+
+  /* ul { */
+    /* padding-left: 20px; */
+    /* margin-left: 10px; */
+  /* margin-bottom: 0; */
+  /* padding: 0; */
+  /* } */
+
+  /* li { */
+    /* list-style-type: disc; */
+    /* padding-left: 0px; */
+    /* margin-bottom: 10px; */
+    /* background-color: aqua; */
+  /* } */
+`
 
 // const ScrollDownDiv = styled.div`
 //   position: fixed;
@@ -88,9 +146,14 @@ export const Experience = React.forwardRef((props, ref) => {
   }, []);
 
   return (
-    <ExperienceDiv screenHeight={screenHeight} ref={props.reference} style={{ paddingTop: '100px' }}>
-
-      <VerticalTimeline>
+    <ExperienceDiv screenHeight={screenHeight} ref={props.reference} className="bg-gray-50 p-10">
+      {/* <h2 class="text-xl font-extrabold text-blue-500 sm:text-2xl md:text-4xl mb-3 text-left ">
+        EDUCATION AND EXPERIENCES
+      </h2> */}
+      <Heading>
+        Experience and Education
+      </Heading>
+      <CustomVerticalTimeline>
 
         {
           [...experienceArray].reverse().map((item, index) => (
@@ -119,7 +182,7 @@ export const Experience = React.forwardRef((props, ref) => {
                 IndusInd Bank for secure data exchange.
                 <br />➢ Collaborated with cross-functional teams to meet user
                 needs and expectations */}
-              <ul style={{ listStyleType: "disc" }}>
+              <ul style={{ listStyleType: "disc" }} className="p-4">
                 {item.data().bulletPoints.map((jData, ind) => (
                   <li key={ind}>{jData}</li>
                 ))}
@@ -159,7 +222,7 @@ export const Experience = React.forwardRef((props, ref) => {
             </ScrollDownDiv>
           }
         />
-      </VerticalTimeline>
+      </CustomVerticalTimeline>
     </ExperienceDiv>
   );
 });

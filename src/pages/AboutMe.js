@@ -36,7 +36,9 @@ const ContentDiv = styled.div`
     // background-color: black;
 `
 const PhotoFrame = styled.div`
-  border: 2px solid black;
+  /* border: 2px solid black; */
+  
+  border: 3px solid orange;
   border-radius: 10px;
   padding: 10px;
   display: inline-block;
@@ -150,7 +152,7 @@ export const AboutMe = React.forwardRef((props, ref) => {
         </PhotoFrame>
         <TextDiv>
           <h4 className='font-bold'>Hi There! 👋</h4>
-          <h1 class="text-3xl font-bold text-gray-800">I'm <br />{firstName ?? ""} {lastName ?? ""}</h1>
+          <h1 class="text-3xl font-bold text-indigo-600">I'm <br />{firstName ?? ""} {lastName ?? ""}</h1>
           <TypeWriterEffect
             textStyle={{
               fontFamily: 'Red Hat Display',

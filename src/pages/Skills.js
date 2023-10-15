@@ -7,9 +7,9 @@ import { Grid, Paper, Switch } from '@mui/material';
 const SkillsDiv = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     // text-align: center;
-    height: 100%;
+    /* height: 100%; */
     padding: 20px;
     /* use state value here */
 
@@ -52,7 +52,6 @@ const SkillsDiv = styled.div`
     /* background-color: aqua; */
   }
 `
-
 const Heading = styled.h1`
     font-size: 24px !important;
     font-weight: bolder;
@@ -71,6 +70,8 @@ max-height: 500px;
 
 const StyledGrid = styled(Grid)`
   && {
+    margin-top: 20px;
+
     @media only screen and (min-width: 600px) {
       grid-template-columns: repeat(12, 1fr);
     }
@@ -79,6 +80,8 @@ const StyledGrid = styled(Grid)`
     }
   }
 `;
+
+
 
 export default function Skills(props) {
     const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -114,11 +117,12 @@ export default function Skills(props) {
 
 
     return (
-        <SkillsDiv screenHeight={screenHeight} ref={props.reference} style={{ paddingTop: '100px' }}>
+        <SkillsDiv screenHeight={screenHeight} ref={props.reference} className="pt-20">
             <Heading>
                 Skills
             </Heading>
-            <StyledGrid container spacing={4} columns={{ xs: 12, md: 15 }}>
+            {/* <br/> */}
+            <StyledGrid container spacing={4} columns={{ xs: 12, md: 15 }} >
 
                 {
                     Object.keys(skillsetArray).map((key, index) => (
