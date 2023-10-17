@@ -11,19 +11,27 @@ import { firestore } from '../Firebase';
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 
-const ExperienceDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    // text-align: center;
-    padding: 20px;
-    /* height: ${props => props.screenHeight}px; use state value here */
-    height: 100%; /* use state value here */
-    background-color: #F8F8F8;
+// const div = styled.div`
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     align-items: center;
+//     flex-wrap: wrap;
+//     // text-align: center;
+//     padding: 20px;
+//     /* height: ${props => props.screenHeight}px; use state value here */
+//     height: 100%; /* use state value here */
+//     background-color: #F8F8F8;
 
-    // background-color: black;
+//     // background-color: black;
+// `
+
+const Heading = styled.h1`
+    font-size: 24px !important;
+    font-weight: bolder;
+    font-family: sans-serif;
+    border-bottom: 5px solid orange;
+    padding-bottom: 10px;
 `
 const ScrollDownDiv = styled.div`
   /* position: fixed; */
@@ -41,6 +49,65 @@ const ScrollDownDiv = styled.div`
   transform: translateX(0%) translateY(100%); /* Center the widget by moving it back 50% of its own width */
   cursor: pointer;
 `;
+
+// const ScrollDownDiv = styled.div`
+//   position: fixed;
+//   bottom: 20px; 
+//   /* Adjust this value as needed to position the widget above the AboutMeDiv */
+//   left: 50%; 
+//   /* Position the widget at the center of the screen horizontally */
+//   transform: translateX(-50%); /* Center the widget by moving it back 50% of its own width */
+//   cursor: pointer;
+// `;
+
+
+const CustomVerticalTimeline = styled(VerticalTimeline)`
+  &::before {
+    background:  orange;
+  }
+`;
+
+
+const ExperienceDiv = styled.div`
+     flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+
+    @media (min-width: 960px) {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+   
+  /* h1 { */
+    /* font-weight: bold; */
+    /* padding: 0; */
+    /* font-size: 18px; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* font-family: 'Ubuntu', sans-serif; */
+    /* white-space: nowrap; */
+    /* margin-bottom: 4px; */
+  /* } */
+  
+  /* p { */
+    /* font-weight: normal; */
+    /* padding-left: 10px; */
+  /* } */
+
+  /* ul { */
+    /* padding-left: 20px; */
+    /* margin-left: 10px; */
+  /* margin-bottom: 0; */
+  /* padding: 0; */
+  /* } */
+
+  /* li { */
+    /* list-style-type: disc; */
+    /* padding-left: 0px; */
+    /* margin-bottom: 10px; */
+    /* background-color: aqua; */
+  /* } */
+`
 
 // const ScrollDownDiv = styled.div`
 //   position: fixed;
@@ -86,19 +153,19 @@ export const Experience = React.forwardRef((props, ref) => {
     fetchExperiences();
     fetchEducations();
   }, []);
-  // experienceArray.forEach((item, index) => {
-
-  //   console.log(item.data().jobTitle);
-  // });
 
   return (
-    <ExperienceDiv screenHeight={screenHeight} ref={props.reference}>
-
-      <VerticalTimeline>
+    <ExperienceDiv screenHeight={screenHeight} ref={props.reference} className="bg-gray-50 p-10">
+      {/* <h2 class="text-xl font-extrabold text-blue-500 sm:text-2xl md:text-4xl mb-3 text-left ">
+        EDUCATION AND EXPERIENCES
+      </h2> */}
+      <Heading>
+        Experience and Education
+      </Heading>
+      <CustomVerticalTimeline>
 
         {
           [...experienceArray].reverse().map((item, index) => (
-            // console.log(item.data().jobTitle);
             <VerticalTimelineElement
               key={index}
               className="vertical-timeline-element--work"
@@ -108,9 +175,9 @@ export const Experience = React.forwardRef((props, ref) => {
               iconStyle={{ background: `${item.data().EndDate ? 'white' : 'rgb(33, 150, 243)'}`, color: `${item.data().EndDate ? 'black' : 'white'}` }}
               icon={item.data().Category == 'Work' ? <WorkIcon /> : <SchoolIcon />}
             >
-              <h3 className="vertical-timeline-element-title">{item.data().jobTitle}</h3>
-              <h4 className="vertical-timeline-element-subtitle">{item.data().companyName}</h4>
-              <h5 className="vertical-timeline-element-subtitle">{item.data().Location}</h5>
+              <h3 className="vertical-timeline-element-title font-bold text-xl">{item.data().jobTitle}</h3>
+              <h4 className="vertical-timeline-element-subtitle font-bold text-base">{item.data().companyName}</h4>
+              <h5 className="vertical-timeline-element-subtitle font-bold text-base">{item.data().Location}</h5>
 
               {/* <br />➢ Developed an Account Aggregator mobile application from
                 scratch with data consent approval process.
@@ -124,7 +191,7 @@ export const Experience = React.forwardRef((props, ref) => {
                 IndusInd Bank for secure data exchange.
                 <br />➢ Collaborated with cross-functional teams to meet user
                 needs and expectations */}
-              <ul style={{ listStyleType: "disc" }}>
+              <ul style={{ listStyleType: "disc" }} className="p-4">
                 {item.data().bulletPoints.map((jData, ind) => (
                   <li key={ind}>{jData}</li>
                 ))}
@@ -145,27 +212,10 @@ export const Experience = React.forwardRef((props, ref) => {
               iconStyle={{ background: `${item.data().EndDate ? 'white' : 'rgb(33, 150, 243)'}`, color: `${item.data().EndDate ? 'black' : 'white'}` }}
               icon={item.data().Category == 'Work' ? <WorkIcon /> : <SchoolIcon />}
             >
-              <h3 className="vertical-timeline-element-title">{item.data().Course}</h3>
+              <h3 className="vertical-timeline-element-title font-bold">{item.data().Course}</h3>
               <h4 className="vertical-timeline-element-subtitle">{item.data().Degree}</h4>
               <h5 className="vertical-timeline-element-subtitle">{item.data().Location}</h5>
               <p>
-                {/* <br />➢ Developed an Account Aggregator mobile application from
-                scratch with data consent approval process.
-                <br />➢ Managed AWS services, including ECS, Task-Definition,
-                Autoscaling, and CI/CD for deployment optimization.
-                <br />➢ Utilized CloudWatch for debugging and timely issue
-                identification and resolution.
-                <br />➢ Handled YES Bank Backend for AFV CERSAI Portal to ensure
-                regulatory compliance.
-                <br />➢ Worked with IBM Developer Portal and API Connect for
-                IndusInd Bank for secure data exchange.
-                <br />➢ Collaborated with cross-functional teams to meet user
-                needs and expectations */}
-                {/* <ul style={{ listStyleType: "disc" }}>
-                  {item.data().bulletPoints.map((jData, ind) => (
-                    <li key={ind}>{jData}</li>
-                  ))}
-                </ul> */}
                 <br />University: <b>{item.data().University}</b>
                 <br />College: <b>{item.data().College}</b>
               </p>
@@ -181,7 +231,7 @@ export const Experience = React.forwardRef((props, ref) => {
             </ScrollDownDiv>
           }
         />
-      </VerticalTimeline>
+      </CustomVerticalTimeline>
     </ExperienceDiv>
   );
 });
